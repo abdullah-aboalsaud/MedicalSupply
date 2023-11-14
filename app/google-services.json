@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "828509099399",
+    "firebase_url": "https://medicalsupply-a2e0c-default-rtdb.firebaseio.com",
+    "project_id": "medicalsupply-a2e0c",
+    "storage_bucket": "medicalsupply-a2e0c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:828509099399:android:00ce427265273292f12f22",
+        "android_client_info": {
+          "package_name": "com.example.medicalsupply"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBY-IWOJ5VQjjupw9r_SRxoUrViVxr63zQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
