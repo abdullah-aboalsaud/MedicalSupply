@@ -18,4 +18,16 @@
     <string name="user_name">User name</string>
     <string name="name">name</string>
     <string name="welcome">Welcome</string>
+
+    <string name="lowercase_letters">Lowercase Letters</string>
+    <string name="uppercase_letters">Uppercase Letters</string>
+    <string name="digits">Digits</string>
+    <string name="special_characters">Special Characters</string>
+    <string name="check_box">check box</string>
+    <string name="register">Register</string>
+    <string name="product_details">product details</string>
+    <string name="product_name">product name</string>
+    <string name="user_review">User Review</string>
+    <string name="no_reviews">No Reviews</string>
+    <string name="add_to_cart">Add To Cart</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.example.medicalsupply.showdata
+package com.example.medicalsupply.product.data
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
@@ -12,12 +12,12 @@ import com.google.firebase.database.ValueEventListener
 
 
 class MyViewModel: ViewModel() {
-    val deviceLiveData =MutableLiveData<ArrayList<ModelDevices>>()
+    val productLiveData =MutableLiveData<ArrayList<ModelDevices>>()
 
     private val database = FirebaseDatabase.getInstance()
     private val myRef = database.getReference(KeyProducts)
 
-     var deviceList = ArrayList<ModelDevices>()
+     var productList = ArrayList<ModelDevices>()
 
 
     fun getDevices(){
@@ -26,13 +26,13 @@ class MyViewModel: ViewModel() {
                 for (snapshot1 in snapshot.children) {
                    val product = snapshot1.getValue(ModelDevices::class.java)
 
-                    deviceList.add(product!!)
+                    productList.add(product!!)
                 }
-                deviceLiveData.value=deviceList
+                productLiveData.value=productList
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
-                Log.e("TAG", "onCancelled ValueEventListener ")
+                Log.e("MyViewModel", "onCancelled ValueEventListener ")
             }
         })
 

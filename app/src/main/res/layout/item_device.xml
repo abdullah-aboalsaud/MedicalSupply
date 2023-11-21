@@ -4,7 +4,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/_10sdp"
-    android:paddingEnd="@dimen/_10sdp">
+    android:paddingEnd="@dimen/_10sdp"
+    >
 
 
     <androidx.cardview.widget.CardView
@@ -27,7 +28,8 @@
                 android:id="@+id/image_product"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_150sdp"
-                android:scaleType="fitXY"
+                android:scaleType="fitCenter"
+                android:src="@drawable/background_image"
                 app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -39,12 +41,11 @@
                 android:layout_marginTop="@dimen/_5sdp"
                 android:ellipsize="end"
                 android:gravity="center"
-                android:maxLines="1"
+                android:maxLines="2"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12ssp"
                 android:textStyle="bold"
                 app:layout_constraintTop_toBottomOf="@+id/image_product"
-
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

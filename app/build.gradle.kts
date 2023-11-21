@@ -59,7 +59,6 @@ dependencies {
     implementation("com.intuit.ssp:ssp-android:1.1.0")
     //sdp
     implementation("com.intuit.sdp:sdp-android:1.1.0")
-
     // Firebase BoM
     implementation(platform("com.google.firebase:firebase-bom:32.5.0"))
     // realtime database
@@ -70,25 +69,34 @@ dependencies {
     // navigation component
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.5")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
-
     // retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     // Gson converter
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-
     // gson
     implementation("com.google.code.gson:gson:2.9.0")
-
     // glide
     implementation("com.github.bumptech.glide:glide:4.16.0")
-
     // rxjava
     implementation("io.reactivex.rxjava2:rxjava:2.2.9")
     // rx with retrofit
     implementation("com.squareup.retrofit2:adapter-rxjava2:2.9.0")
     // rxAndroid
     implementation("io.reactivex.rxjava2:rxandroid:2.1.1")
-
+    //circle image
     implementation ("de.hdodenhof:circleimageview:3.1.0")
+
+    // Room
+    val roomversion = "2.6.0"
+    implementation("androidx.room:room-runtime:$roomversion")
+    annotationProcessor("androidx.room:room-compiler:$roomversion")
+    // To use Kotlin annotation processing tool (kapt)
+    kapt("androidx.room:room-compiler:$roomversion")
+    // Kotlin Extensions and Coroutines support for Room
+    implementation("androidx.room:room-ktx:$roomversion")
+
+    // lottie
+    implementation("com.airbnb.android:lottie:6.1.0")
+
 
 }

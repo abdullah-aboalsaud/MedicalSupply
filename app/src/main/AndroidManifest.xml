@@ -15,33 +15,33 @@
         android:theme="@style/Theme.MedicalSupply"
         tools:targetApi="31">
         <activity
-            android:name=".remote.SendRealtime"
-            android:exported="true">
-        </activity>
-
-        <activity
-            android:name=".showdata.DetailsActivity"
+            android:name=".product.ProductsActivity"
             android:exported="false" />
 
         <activity
-            android:name=".showdata.HomeActivity"
-            android:exported="true">
-        </activity>
-
-        <activity
-            android:name=".authentication.SignUpActivity"
+            android:name=".auth.AuthActivity"
             android:exported="false" />
 
-        <!-- the intent filter should be here -->
+        <!-- SplashScreen Activity -->
         <activity
-            android:name=".authentication.LoginActivity"
+            android:name=".ui.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
+
+
+        <activity
+            android:name=".TestProgressDialog"
+            android:exported="false" />
+
+        <activity
+            android:name=".remote.SendRealtime"
+            android:exported="true">
+        </activity>
+
 
     </application>
 

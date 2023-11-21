@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="light_green">#22C7B8</color>
+
+    <color name="colorAccent">#03DAC5</color>
+
+    <color name="light_gray">#E3E3E3</color>
+    <color name="dark_gray">#959595</color>
+    <color name="weak">#FF4646</color>
+    <color name="medium">#ff8f00</color>
+    <color name="strong">#FCCA3F</color>
+    <color name="very_strong">#00c853</color>
+    <color name="colorTextSecondary">#636363</color>
+    <color name="price">#00FF00</color>
+
+    <color name="tango">#F17A12</color>
+    <color name="soft_gray">#cccccc</color>
+
+
 </resources>
