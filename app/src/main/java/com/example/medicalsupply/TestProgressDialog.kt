@@ -19,6 +19,7 @@ class TestProgressDialog : AppCompatActivity() {
 
         Handler().postDelayed(object : Runnable {
             override fun run() {
+
                 /** 3. end dialog  */
                 loading.isDismiss()
             }

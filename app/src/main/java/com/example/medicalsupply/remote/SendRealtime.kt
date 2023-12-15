@@ -3,9 +3,9 @@ package com.example.medicalsupply.remote
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.example.medicalsupply.KeyProducts
+import com.example.medicalsupply.core.KeyProducts
 import com.example.medicalsupply.R
-import com.example.medicalsupply.models.ModelDevices
+import com.example.medicalsupply.models.ModelProduct
 import com.google.firebase.database.FirebaseDatabase
 
 class SendRealtime : AppCompatActivity() {
@@ -17,7 +17,7 @@ class SendRealtime : AppCompatActivity() {
         setContentView(R.layout.activity_send_realtime)
 
         val id = myRef.push().key
-        val modelDevices = ModelDevices(
+        val modelDevices = ModelProduct(
             "medical devices",
             "",
             id!!,

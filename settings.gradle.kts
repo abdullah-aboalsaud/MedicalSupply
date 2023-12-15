@@ -10,9 +10,11 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        //noinspection JcenterRepositoryObsolete
+        jcenter()
     }
 }
 
 rootProject.name = "MedicalSupply"
 include(":app")
- 
+include(":app:myapplication")

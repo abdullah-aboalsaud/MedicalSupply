@@ -4,6 +4,7 @@ plugins {
     id("com.google.gms.google-services")
     id("androidx.navigation.safeargs.kotlin")
     id("kotlin-parcelize")
+    id("dagger.hilt.android.plugin")
     kotlin("kapt")
 }
 
@@ -77,26 +78,58 @@ dependencies {
     implementation("com.google.code.gson:gson:2.9.0")
     // glide
     implementation("com.github.bumptech.glide:glide:4.16.0")
-    // rxjava
-    implementation("io.reactivex.rxjava2:rxjava:2.2.9")
     // rx with retrofit
     implementation("com.squareup.retrofit2:adapter-rxjava2:2.9.0")
     // rxAndroid
     implementation("io.reactivex.rxjava2:rxandroid:2.1.1")
     //circle image
-    implementation ("de.hdodenhof:circleimageview:3.1.0")
+    implementation("de.hdodenhof:circleimageview:3.1.0")
 
     // Room
-    val roomversion = "2.6.0"
-    implementation("androidx.room:room-runtime:$roomversion")
-    annotationProcessor("androidx.room:room-compiler:$roomversion")
+
+    implementation("androidx.room:room-runtime:2.6.1")
     // To use Kotlin annotation processing tool (kapt)
-    kapt("androidx.room:room-compiler:$roomversion")
+    kapt("androidx.room:room-compiler:2.6.1")
     // Kotlin Extensions and Coroutines support for Room
-    implementation("androidx.room:room-ktx:$roomversion")
+    implementation("androidx.room:room-ktx:2.6.1")
+
+    // optional - RxJava2 support for Room
+    implementation("androidx.room:room-rxjava2:2.6.1")
 
     // lottie
     implementation("com.airbnb.android:lottie:6.1.0")
+
+
+
+
+    //loading button
+    implementation ("br.com.simplepass:loading-button-android:2.2.0")
+
+    //Glide
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
+
+
+    //viewpager2 indicatior
+    implementation ("io.github.vejei.viewpagerindicator:viewpagerindicator:1.0.0-alpha.1")
+
+    //stepView
+    implementation ("com.shuhart.stepview:stepview:1.5.1")
+
+    //Android Ktx
+    implementation ("androidx.navigation:navigation-fragment-ktx:2.7.5")
+
+    //Dagger hilt
+    implementation ("com.google.dagger:hilt-android:2.43.2")
+    kapt ("com.google.dagger:hilt-compiler:2.43.2")
+
+    // Firebase Firestore
+    implementation ("com.google.firebase:firebase-firestore:24.10.0")
+
+    // firebase storage
+    implementation ("com.google.firebase:firebase-storage:20.3.0")
+
+    //Color picker
+    implementation ("com.github.skydoves:colorpickerview:2.2.4")
 
 
 }

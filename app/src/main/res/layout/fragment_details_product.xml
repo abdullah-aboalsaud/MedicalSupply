@@ -39,7 +39,9 @@
                 android:padding="10dp"
                 android:src="@drawable/ic_cart"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:visibility="invisible"
+                />
 
             <ImageView
                 android:id="@+id/iv_image_product"

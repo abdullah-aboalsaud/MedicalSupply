@@ -12,14 +12,13 @@ import androidx.lifecycle.Observer
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.medicalsupply.KeyUser
+import com.example.medicalsupply.core.KeyUser
 import com.example.medicalsupply.R
 import com.example.medicalsupply.auth.password_handling.PasswordStrengthCalculator
 import com.example.medicalsupply.auth.password_handling.StrengthLevel
 import com.example.medicalsupply.databinding.FragmentSignUpBinding
 import com.example.medicalsupply.models.ModelUser
-import com.example.medicalsupply.product.ProductsActivity
-import com.example.medicalsupply.product.fragments.DetailsProductFragmentArgs
+import com.example.medicalsupply.shopping.ShoppingActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
@@ -149,7 +148,7 @@ class SignUpFragment : Fragment() {
             .addOnSuccessListener {
                 binding.progress.visibility = View.GONE
 
-                startActivity(Intent(requireContext(), ProductsActivity::class.java))
+                startActivity(Intent(requireContext(), ShoppingActivity::class.java))
                 requireActivity().finish()
 
             }.addOnFailureListener {

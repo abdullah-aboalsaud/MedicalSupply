@@ -38,17 +38,12 @@ class PasswordStrengthCalculator : TextWatcher {
                 strengthColor.value = R.color.medium
                 strengthLevel.value = StrengthLevel.MEDIUM
             }
-        }else if(password.length in 7 .. 8){
+        }else if(password.length >= 7){
             if(lowerCase.value == 1 || upperCase.value == 1 || digit.value == 1 || specialChar.value == 1){
                 if(lowerCase.value == 1 && upperCase.value == 1){
                     strengthColor.value = R.color.very_strong
                     strengthLevel.value = StrengthLevel.STRONG
                 }
-            }
-        }else if(password.length > 8){
-            if(lowerCase.value == 1 && upperCase.value == 1 && digit.value == 1 && specialChar.value == 1){
-                strengthColor.value = R.color.very_strong
-                strengthLevel.value = StrengthLevel.VERY_STRONG
             }
         }
     }

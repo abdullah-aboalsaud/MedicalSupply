@@ -30,4 +30,21 @@
     <string name="user_review">User Review</string>
     <string name="no_reviews">No Reviews</string>
     <string name="add_to_cart">Add To Cart</string>
+    <string name="process_to_checkout">process to Checkout</string>
+    <string name="products">Products</string>
+    <string name="price">Price</string>
+    <string name="sub_total">Sub Total</string>
+    <string name="carts">Carts</string>
+    <string name="cart">Cart</string>
+    <string name="search">Search</string>
+    <string name="don_t_have_an_account_register">Don\'t have an account? register</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="reset_password_message">We will send you the password reset link to your email</string>
+    <string name="your_email">Your email</string>
+    <string name="cancel">Cancel</string>
+    <string name="send">Send</string>
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+    <string name="add_product">Add Product</string>
+    <string name="save">Save</string>
 </resources>
