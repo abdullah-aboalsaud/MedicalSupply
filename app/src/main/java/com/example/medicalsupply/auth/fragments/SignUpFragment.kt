@@ -19,14 +19,16 @@ import com.example.medicalsupply.auth.password_handling.StrengthLevel
 import com.example.medicalsupply.databinding.FragmentSignUpBinding
 import com.example.medicalsupply.models.ModelUser
 import com.example.medicalsupply.shopping.ShoppingActivity
+import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.firestore
 
 class SignUpFragment : Fragment() {
     private var _binding: FragmentSignUpBinding? = null
     private val binding get() = _binding!!
     private val auth = FirebaseAuth.getInstance()
-    private val reference = FirebaseDatabase.getInstance().reference
+    private val db = Firebase.firestore
     private var color: Int = R.color.weak
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -143,8 +145,9 @@ class SignUpFragment : Fragment() {
     }
 
     private fun sendDataToRealTime(name: String, email: String, userId: String) {
-        reference.child(KeyUser)
-            .child(userId).setValue(ModelUser(email, name, userId))
+        db.collection(KeyUser)
+            .document(userId)
+            .set(ModelUser(email,name,userId))
             .addOnSuccessListener {
                 binding.progress.visibility = View.GONE
 
@@ -162,10 +165,6 @@ class SignUpFragment : Fragment() {
             }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 
     override fun onDestroy() {
         super.onDestroy()

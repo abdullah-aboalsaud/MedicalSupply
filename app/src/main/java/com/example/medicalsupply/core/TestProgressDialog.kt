@@ -1,8 +1,9 @@
-package com.example.medicalsupply
+package com.example.medicalsupply.core
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import com.example.medicalsupply.R
 import com.example.medicalsupply.ui.LoadingDialog
 
 /** Here we implement progress Dialog*/

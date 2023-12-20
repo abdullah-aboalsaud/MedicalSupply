@@ -47,4 +47,7 @@
     <string name="profile">Profile</string>
     <string name="add_product">Add Product</string>
     <string name="save">Save</string>
+    <string name="search_now">Search Now</string>
+    <string name="best_deals">Best Deals</string>
+    <string name="best_products">Best Products</string>
 </resources>

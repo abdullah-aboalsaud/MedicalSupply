@@ -4,9 +4,9 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@color/g_card_background"
-    android:orientation="vertical"
-    app:cardCornerRadius="5dp"
-    android:layout_margin="2dp">
+    app:elevation="0dp"
+
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -16,10 +16,10 @@
             android:id="@+id/img_product"
             android:layout_width="114dp"
             android:layout_height="108dp"
-            android:scaleType="fitCenter"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:scaleType="fitCenter"/>
 
         <LinearLayout
             android:id="@+id/linear_product_name"
@@ -27,24 +27,20 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="@id/img_product"
             app:layout_constraintStart_toStartOf="@id/img_product"
             app:layout_constraintTop_toBottomOf="@id/img_product"
-            >
+            app:layout_constraintEnd_toEndOf="@id/img_product">
 
             <TextView
                 android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="6"
                 android:fontFamily="@font/poppins_light"
                 android:text="Chair"
                 android:textColor="@color/black"
-                android:textSize="13sp"
+                android:textSize="14sp"
                 android:textStyle="bold"
-                android:maxLines="2"
-                android:layout_gravity="start"
-                />
+                android:layout_weight="1"/>
 
             <ImageView
                 android:id="@+id/img_favorite"
@@ -54,8 +50,7 @@
                 android:layout_marginEnd="16dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_favorite"
-                app:tint="@color/g_blue_gray200"
-                />
+                app:tint="@color/g_blue_gray200" />
         </LinearLayout>
 
 
@@ -63,32 +58,31 @@
             android:id="@+id/tv_new_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="1dp"
             android:layout_marginTop="3dp"
             android:layout_marginBottom="15dp"
             android:fontFamily="@font/sf_pro_display"
-            android:text="EGP1600"
+            android:text="$1600"
             android:textColor="@color/black"
             android:textSize="12sp"
-            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@id/img_product"
-            app:layout_constraintTop_toBottomOf="@id/linear_product_name" />
+            app:layout_constraintStart_toEndOf="@id/tv_price"
+            app:layout_constraintTop_toBottomOf="@id/linear_product_name"
+            android:layout_marginStart="10dp"/>
 
         <TextView
             android:id="@+id/tv_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
             android:layout_marginTop="3dp"
             android:layout_marginBottom="15dp"
             android:fontFamily="@font/sf_pro_display"
-            android:text="EGP 1600"
+            android:text="$1600"
             android:textColor="@color/black"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/tv_new_price"
+            app:layout_constraintStart_toStartOf="@id/img_product"
             app:layout_constraintTop_toBottomOf="@id/linear_product_name" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -34,9 +34,8 @@ import java.util.UUID
 
 class ProductsAdder : AppCompatActivity() {
     private val binding by lazy { ActivityProductsAdderBinding.inflate(layoutInflater) }
-    private var selectedImages = mutableListOf<Uri>()
+    var selectedImages = mutableListOf<Uri>()
     private val selectedColors = mutableListOf<Int>()
-
     private val productStorage = FirebaseStorage.getInstance().reference
     private val firestore = Firebase.firestore
 
@@ -149,8 +148,9 @@ class ProductsAdder : AppCompatActivity() {
                         }
                     }
                 }.await()
+                hideLoading()
             } catch (e: Exception) {
-                e.printStackTrace()
+                Log.e("TAG", e.localizedMessage)
                 withContext(Dispatchers.Main){
                     hideLoading()
                 }
@@ -172,6 +172,7 @@ class ProductsAdder : AppCompatActivity() {
             firestore.collection("Products").add(product)
                 .addOnSuccessListener {
                     hideLoading()
+                    emptyTheEdText()
                 }
                 .addOnFailureListener{
                     hideLoading()
@@ -180,6 +181,21 @@ class ProductsAdder : AppCompatActivity() {
         }
 
 
+    }
+
+    private fun emptyTheEdText(){
+        binding.apply {
+            edCategory.text=null
+            edName.text=null
+            edDescription.text=null
+            edPrice.text=null
+            edSizes.text=null
+            offerPercentage.text=null
+            selectedImages.clear()
+            tvSelectedImages.text = null
+            selectedColors.clear()
+            tvSelectedColors.text=null
+        }
     }
 
     private fun getImagesByteArrays(): List<ByteArray> {
@@ -218,9 +234,8 @@ class ProductsAdder : AppCompatActivity() {
             return false
         if (binding.edCategory.text.toString().trim().isEmpty())
             return false
-        if (selectedImages.isEmpty())
-            return false
-        return true
+        return !selectedImages.isEmpty()
     }
+
 
 }
