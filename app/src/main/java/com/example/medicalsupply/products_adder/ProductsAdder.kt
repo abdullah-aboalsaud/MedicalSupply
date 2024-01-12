@@ -223,7 +223,6 @@ class ProductsAdder : AppCompatActivity() {
     private fun getSizesList(sizesString: String): List<String>? {
         if (sizesString.isEmpty())
             return null
-
         return sizesString.split(",")
     }
 

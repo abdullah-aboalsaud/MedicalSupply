@@ -46,7 +46,6 @@ class LoginFragment : Fragment() {
 
         binding.tvForgetPassword.setOnClickListener {
             setupBottomSheetDialog {email->
-
                 auth.sendPasswordResetEmail(email)
                     .addOnSuccessListener {
                         Toast.makeText(requireContext(),"Reset link was sent to your email",Toast.LENGTH_LONG).show()

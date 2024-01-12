@@ -45,11 +45,13 @@ class HomeFragment : Fragment() {
             DentalFragment(),
             PharmacyFragment(),
             NursingFragment()
-            )
+        )
         binding.viewPagerHome.isUserInputEnabled = false
+
         val viewPager2Adapter =
             HomeViewPagerAdapter(categoriesFragments, childFragmentManager, lifecycle)
         binding.viewPagerHome.adapter = viewPager2Adapter
+
         TabLayoutMediator(binding.tabLayout, binding.viewPagerHome) { tab, position ->
             when (position) {
                 0 -> tab.text = "Home"

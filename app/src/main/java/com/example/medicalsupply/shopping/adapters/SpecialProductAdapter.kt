@@ -34,7 +34,7 @@ class SpecialProductAdapter : RecyclerView.Adapter<SpecialProductAdapter.ViewHol
         }
     }
 
-     val differ = AsyncListDiffer(this, diffCallable)
+    val differ = AsyncListDiffer(this, diffCallable)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -43,13 +43,18 @@ class SpecialProductAdapter : RecyclerView.Adapter<SpecialProductAdapter.ViewHol
     }
 
     override fun getItemCount(): Int {
-      return differ.currentList.size
+        return differ.currentList.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val product = differ.currentList[position]
         holder.bind(product)
+
+        holder.itemView.setOnClickListener {
+            onClick?.invoke(product)
+        }
     }
 
+    var onClick: ((Product) -> Unit)? = null
 
 }

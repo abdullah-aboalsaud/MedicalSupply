@@ -24,17 +24,6 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:listitem="@layout/item_special_rv" />
 
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/progress_special"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:visibility="visible"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:lottie_rawRes="@raw/animation_loading"
-            app:layout_constraintTop_toTopOf="@id/rv_special_products"
-            app:layout_constraintBottom_toBottomOf="@id/rv_special_products"
-            />
 
 
         <TextView
@@ -61,17 +50,17 @@
             app:layout_constraintStart_toStartOf="@id/rv_special_products"
             app:layout_constraintTop_toBottomOf="@id/tv_best_deals"
             tools:listitem="@layout/item_best_deals_rv" />
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/progress_deals"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:visibility="visible"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:lottie_rawRes="@raw/animation_loading"
-            app:layout_constraintTop_toTopOf="@id/rv_best_deals_products"
-            app:layout_constraintBottom_toBottomOf="@id/rv_best_deals_products"
-            />
+
+<!--        <com.airbnb.lottie.LottieAnimationView-->
+<!--            android:id="@+id/progress_deals"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:visibility="visible"-->
+<!--            app:layout_constraintBottom_toBottomOf="@id/rv_best_deals_products"-->
+<!--            app:layout_constraintTop_toTopOf="@id/rv_best_deals_products"-->
+<!--            app:lottie_autoPlay="true"-->
+<!--            app:lottie_loop="true"-->
+<!--            app:lottie_rawRes="@raw/animation_loading" />-->
 
         <TextView
             android:id="@+id/tv_best_products"
@@ -101,15 +90,16 @@
             app:reverseLayout="false"
             app:spanCount="2"
             tools:listitem="@layout/item_product_rv" />
+
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/progress_best_products"
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:visibility="visible"
+            app:layout_constraintTop_toTopOf="@id/rv_best_products"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/animation_loading"
-            app:layout_constraintTop_toTopOf="@id/rv_best_products"
 
             />
 

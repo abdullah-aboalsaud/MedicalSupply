@@ -3,7 +3,7 @@ package com.example.medicalsupply.data
 import android.util.Log
 
 import androidx.lifecycle.MutableLiveData
-import com.example.medicalsupply.core.KeyProducts
+import com.example.medicalsupply.utils.KeyProducts
 import com.example.medicalsupply.data.room.ProductDatabase
 import com.example.medicalsupply.models.ModelProduct
 import com.google.firebase.database.DataSnapshot

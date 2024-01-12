@@ -21,14 +21,14 @@ class SplashActivity : AppCompatActivity() {
         _binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-         binding.progress.visibility = View.VISIBLE
+        binding.progress.visibility = View.VISIBLE
 
 
         Handler(Looper.getMainLooper()).postDelayed({
-            if(auth.uid==null){
+            if (auth.uid == null) {
                 startActivity(Intent(this@SplashActivity, AuthActivity::class.java))
                 finish()
-            }else{
+            } else {
                 startActivity(Intent(this@SplashActivity, ShoppingActivity::class.java))
                 finish()
             }

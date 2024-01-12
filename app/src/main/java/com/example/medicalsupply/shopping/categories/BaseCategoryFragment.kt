@@ -7,11 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.medicalsupply.R
 import com.example.medicalsupply.databinding.FragmentBaseCategoryBinding
 import com.example.medicalsupply.databinding.ItemProductRvBinding
 import com.example.medicalsupply.shopping.adapters.BestProductAdapter
+import com.example.medicalsupply.shopping.fragments.HomeFragmentDirections
 import com.example.medicalsupply.shopping.viewmodels.MainCategoryViewModel
+import com.example.medicalsupply.utils.showBottomNavigationView
 
 open class BaseCategoryFragment : Fragment(R.layout.fragment_base_category) {
     protected lateinit var binding: FragmentBaseCategoryBinding
@@ -31,13 +34,32 @@ open class BaseCategoryFragment : Fragment(R.layout.fragment_base_category) {
         super.onViewCreated(view, savedInstanceState)
         setUpOfferRv()
         setUpBestProductRv()
+
+        bestProductAdapter.onClick = {
+            findNavController().navigate(
+                HomeFragmentDirections.actionHomeFragmentToProductDetailsFragment(it)
+            )
+        }
+
+        offerAdapter.onClick = {
+            findNavController().navigate(
+                HomeFragmentDirections.actionHomeFragmentToProductDetailsFragment(it)
+            )
+        }
+
     }
 
     private fun setUpBestProductRv() {
-        binding.rvBestProducts.adapter = bestProductAdapter
+        binding.rvBestProductsCategory.adapter = bestProductAdapter
     }
 
     private fun setUpOfferRv() {
-        binding.rvOffer.adapter = offerAdapter
+        binding.rvOfferCategory.adapter = offerAdapter
     }
+
+    override fun onResume() {
+        super.onResume()
+        showBottomNavigationView()
+    }
+
 }

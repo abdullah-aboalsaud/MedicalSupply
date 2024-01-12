@@ -4,18 +4,25 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.medicalsupply.core.KeyProducts
+import com.example.medicalsupply.utils.KeyProducts
 import com.example.medicalsupply.models.Category
 import com.example.medicalsupply.models.Product
+import com.example.medicalsupply.utils.Resource
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class CategoryViewModel(private val category: Category) : ViewModel() {
     private val firestore = Firebase.firestore
 
-    val offerProdLivedata: MutableLiveData<List<Product>> = MutableLiveData()
-    val bestProdLivedata: MutableLiveData<List<Product>> = MutableLiveData()
+    private val _offerProductSF = MutableStateFlow<Resource<List<Product>>>(Resource.Unspecified())
+    val offerProductSF = _offerProductSF.asStateFlow()
+
+    private val _bestProductSF = MutableStateFlow<Resource<List<Product>>>(Resource.Unspecified())
+    val bestProductSF = _bestProductSF.asStateFlow()
 
     init {
         fetchOfferProducts()
@@ -24,27 +31,43 @@ class CategoryViewModel(private val category: Category) : ViewModel() {
 
     private fun fetchOfferProducts() {
         viewModelScope.launch {
-            firestore.collection(KeyProducts).whereEqualTo("category", category.category)
-                .whereNotEqualTo("offerPercentage", null).get()
-                .addOnSuccessListener {
-                    val product = it.toObjects(Product::class.java)
-                    offerProdLivedata.postValue(product)
-                }.addOnFailureListener {
-                    Log.e("TAG", "fetchOfferProducts: ${it.localizedMessage}")
-                }
+            _offerProductSF.emit(Resource.Loading())
         }
+        firestore.collection(KeyProducts).whereEqualTo("category", category.category)
+            .whereNotEqualTo("offerPercentage", null).get()
+            .addOnSuccessListener {
+                viewModelScope.launch {
+                    val product = it.toObjects(Product::class.java)
+                    _offerProductSF.emit(Resource.Success(product))
+                }
+
+            }.addOnFailureListener {
+                viewModelScope.launch {
+                    _offerProductSF.emit(Resource.Error(it.message.toString()))
+                }
+            }
+
     }
 
     private fun fetchBestProducts() {
         viewModelScope.launch {
-            firestore.collection(KeyProducts).whereEqualTo("category", category.category)
-                .whereEqualTo("offerPercentage", null).get()
-                .addOnSuccessListener {
-                    val product = it.toObjects(Product::class.java)
-                    bestProdLivedata.postValue(product)
-                }.addOnFailureListener {
-                    Log.e("TAG", "fetchBestProducts: ${it.localizedMessage}")
-                }
+            _bestProductSF.emit(Resource.Loading())
         }
+        firestore.collection(KeyProducts).whereEqualTo("category", category.category)
+            .whereEqualTo("offerPercentage", null).get()
+            .addOnSuccessListener {
+                viewModelScope.launch {
+                    val product = it.toObjects(Product::class.java)
+                    _bestProductSF.emit(Resource.Success(product))
+                }
+
+            }.addOnFailureListener {
+                viewModelScope.launch {
+                    _bestProductSF.emit(Resource.Error(it.message.toString()))
+                }
+            }
+
     }
+
+
 }

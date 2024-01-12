@@ -20,7 +20,8 @@
         <activity
             android:name=".products_adder.ProductsAdder"
             android:exported="true"
-            android:theme="@style/Theme.Material3.Light">
+            android:theme="@style/Theme.Material3.Light"
+            >
             <!--Product Adder-->
         </activity>
 

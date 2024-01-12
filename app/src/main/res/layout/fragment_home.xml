@@ -98,7 +98,7 @@
         app:layout_constraintTop_toBottomOf="@id/home_header"
         app:tabMode="scrollable"
         app:tabRippleColor="@color/white"
-        app:tabSelectedTextColor="@color/black"
+        app:tabSelectedTextColor="@color/light_green"
         app:tabTextAppearance="@style/tabLayout_text" />
 
     <androidx.viewpager2.widget.ViewPager2

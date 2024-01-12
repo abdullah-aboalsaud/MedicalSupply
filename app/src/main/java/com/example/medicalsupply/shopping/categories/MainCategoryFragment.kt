@@ -1,23 +1,28 @@
 package com.example.medicalsupply.shopping.categories
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.liveData
+import androidx.navigation.fragment.findNavController
 import com.example.medicalsupply.R
 import com.example.medicalsupply.databinding.FragmentMainCategoryBinding
-import com.example.medicalsupply.databinding.ItemSpecialRvBinding
 import com.example.medicalsupply.shopping.adapters.BestDealsAdapter
 import com.example.medicalsupply.shopping.adapters.BestProductAdapter
 import com.example.medicalsupply.shopping.adapters.SpecialProductAdapter
+import com.example.medicalsupply.shopping.fragments.HomeFragmentDirections
 import com.example.medicalsupply.shopping.viewmodels.MainCategoryViewModel
-import kotlinx.coroutines.flow.collect
+import com.example.medicalsupply.utils.Resource
+import com.example.medicalsupply.utils.showBottomNavigationView
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
+
+private const val TAG = "MainCategoryFragment"
 
 class MainCategoryFragment : Fragment(R.layout.fragment_main_category) {
     private lateinit var binding: FragmentMainCategoryBinding
@@ -34,12 +39,12 @@ class MainCategoryFragment : Fragment(R.layout.fragment_main_category) {
         binding = FragmentMainCategoryBinding.inflate(inflater)
         return binding.root
     }
-    
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.fetchSpecialProducts()
         viewModel.fetchBestDeals()
         viewModel.fetchBestProducts()
+        viewModel.fetchSpecialProducts()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -49,42 +54,118 @@ class MainCategoryFragment : Fragment(R.layout.fragment_main_category) {
         setUpBestDealsRv()
         setUpBestProductsRv()
 
+        specialProductAdapter.onClick = {
+            findNavController().navigate(
+                HomeFragmentDirections.actionHomeFragmentToProductDetailsFragment(it)
+            )
+        }
+        bestDealsAdapter.onClick = {
+            findNavController().navigate(
+                HomeFragmentDirections.actionHomeFragmentToProductDetailsFragment(it)
+            )
+        }
+        bestProductAdapter.onClick = {
+            findNavController().navigate(
+                HomeFragmentDirections.actionHomeFragmentToProductDetailsFragment(it)
+            )
+        }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.specialProductsSF.collectLatest {
+                when (it) {
+                    is Resource.Loading -> {
+                        showLoading()
+                    }
+
+                    is Resource.Success -> {
+                        specialProductAdapter.differ.submitList(it.data)
+                        hideLoading()
+                    }
+
+                    is Resource.Error -> {
+                        hideLoading()
+                        Log.e(TAG, it.message.toString())
+                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                    }
+
+                    else -> Unit
+                }
+            }
+        }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.bestDealsSF.collectLatest {
+                when (it) {
+                    is Resource.Loading -> {
+                        showLoading()
+                    }
+
+                    is Resource.Success -> {
+                        bestDealsAdapter.differ.submitList(it.data)
+                        hideLoading()
+                    }
+
+                    is Resource.Error -> {
+                        hideLoading()
+                        Log.e(TAG, it.message.toString())
+                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                    }
+
+                    else -> Unit
+                }
+            }
+        }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.bestProductsSF.collectLatest {
+                when (it) {
+                    is Resource.Loading -> {
+                        showLoading()
+                    }
+
+                    is Resource.Success -> {
+                        bestProductAdapter.differ.submitList(it.data)
+                        hideLoading()
+                    }
+
+                    is Resource.Error -> {
+                        hideLoading()
+                        Log.e(TAG, it.message.toString())
+                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                    }
+                    else -> Unit
+                }
+            }
+        }
 
     }
 
     private fun setUpBestProductsRv() {
-        bestProductAdapter=BestProductAdapter()
-
-        viewModel.bestProductsLiveData.observe(viewLifecycleOwner){productList->
-            bestProductAdapter.differ.submitList(productList)
-            binding.rvBestProducts.adapter = bestProductAdapter
-
-            binding.progressBestProducts.visibility=View.GONE
-        }
-
+        bestProductAdapter = BestProductAdapter()
+        binding.rvBestProducts.adapter = bestProductAdapter
     }
 
     private fun setUpBestDealsRv() {
-        bestDealsAdapter=BestDealsAdapter()
-
-        viewModel.bestDealsProductsLivedata.observe(viewLifecycleOwner){productList->
-            bestDealsAdapter.differ.submitList(productList)
-            binding.rvBestDealsProducts.adapter = bestDealsAdapter
-
-            binding.progressDeals.visibility=View.GONE
-        }
+        bestDealsAdapter = BestDealsAdapter()
+        binding.rvBestDealsProducts.adapter = bestDealsAdapter
     }
+
 
     private fun setUpSpecialProductRv() {
         specialProductAdapter = SpecialProductAdapter()
+        binding.rvSpecialProducts.adapter = specialProductAdapter
+    }
 
-        viewModel.specialProductsLivedata.observe(viewLifecycleOwner) {
-            specialProductAdapter.differ.submitList(it)
-            binding.rvSpecialProducts.adapter = specialProductAdapter
+    private fun showLoading() {
+        binding.progressBestProducts.visibility = View.VISIBLE
+    }
 
-            binding.progressSpecial.visibility=View.GONE
-        }
+    private fun hideLoading() {
+        binding.progressBestProducts.visibility = View.GONE
+    }
 
-
+    override fun onResume() {
+        super.onResume()
+        showBottomNavigationView()
     }
 }
