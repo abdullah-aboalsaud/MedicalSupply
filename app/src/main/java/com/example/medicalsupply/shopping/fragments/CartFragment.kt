@@ -44,22 +44,32 @@ class CartFragment : Fragment() {
 
         setUpCartRv()
 
+        var totalPrice = 0f
         lifecycleScope.launchWhenStarted {
-            viewModel.productPrice.collectLatest {price->
+            viewModel.productPrice.collectLatest { price ->
                 price?.let {
+                    totalPrice = it
                     binding.tvTotalprice.text = "EGP $price"
                 }
             }
         }
 
-        cartAdapter.onProductClick={
-            findNavController().navigate(CartFragmentDirections.actionCartFragmentToProductDetailsFragment(it.product))
+        binding.btnCheckout.setOnClickListener {
+            val action = CartFragmentDirections.actionCartFragmentToBillingFragment(totalPrice,
+                cartAdapter.differ.currentList.toTypedArray())
+            findNavController().navigate(action)
         }
-        cartAdapter.onPlusClick={
-            viewModel.changeQuantity(it,FirebaseCommon.QuantityChanging.INCREASE)
+
+        cartAdapter.onProductClick = {
+            findNavController().navigate(
+                CartFragmentDirections.actionCartFragmentToProductDetailsFragment(it.product)
+            )
         }
-        cartAdapter.onMinusClick={
-            viewModel.changeQuantity(it,FirebaseCommon.QuantityChanging.DECREASE)
+        cartAdapter.onPlusClick = {
+            viewModel.changeQuantity(it, FirebaseCommon.QuantityChanging.INCREASE)
+        }
+        cartAdapter.onMinusClick = {
+            viewModel.changeQuantity(it, FirebaseCommon.QuantityChanging.DECREASE)
         }
 
         lifecycleScope.launchWhenStarted {
@@ -67,10 +77,10 @@ class CartFragment : Fragment() {
                 val alertDialog = AlertDialog.Builder(requireContext()).apply {
                     setTitle(getString(R.string.delete_item_from_cart))
                     setMessage(getString(R.string.delete_item_from_cart_message))
-                    setNegativeButton("Cancel"){dialog,_->
+                    setNegativeButton("Cancel") { dialog, _ ->
                         dialog.dismiss()
                     }
-                    setPositiveButton("Delete"){dialog,_->
+                    setPositiveButton("Delete") { dialog, _ ->
                         viewModel.deleteCartProduct(it)
                         dialog.dismiss()
                     }
@@ -89,10 +99,10 @@ class CartFragment : Fragment() {
 
                     is Resource.Success -> {
                         binding.progressBar.visibility = View.GONE
-                        if (it.data!!.isEmpty()){
+                        if (it.data!!.isEmpty()) {
                             showEmptyCart()
                             hideOtherViews()
-                        }else{
+                        } else {
                             hideEmptyCart()
                             showOtherViews()
                             cartAdapter.differ.submitList(it.data)
@@ -110,6 +120,7 @@ class CartFragment : Fragment() {
             }
 
         }
+
 
     }
 

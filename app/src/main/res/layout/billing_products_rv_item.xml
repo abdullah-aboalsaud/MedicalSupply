@@ -60,6 +60,7 @@
             app:layout_constraintTop_toBottomOf="@id/tvProductCartName"/>
 
         <de.hdodenhof.circleimageview.CircleImageView
+            android:visibility="gone"
             android:id="@+id/imageCartProductColor"
             android:layout_width="15dp"
             android:layout_height="15dp"
@@ -69,6 +70,7 @@
             app:layout_constraintTop_toBottomOf="@id/tvProductCartPrice"/>
 
         <de.hdodenhof.circleimageview.CircleImageView
+            android:visibility="gone"
             android:id="@+id/imageCartProductSize"
             android:layout_width="15dp"
             android:layout_height="15dp"
@@ -80,6 +82,7 @@
 
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/tvCartProductSize"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

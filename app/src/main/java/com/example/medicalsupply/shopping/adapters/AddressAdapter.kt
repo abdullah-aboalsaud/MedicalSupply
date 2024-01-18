@@ -17,15 +17,18 @@ import com.example.medicalsupply.models.Address
 import com.example.medicalsupply.models.Product
 
 class AddressAdapter : RecyclerView.Adapter<AddressAdapter.AddressViewHolder>() {
+
     inner class AddressViewHolder(val binding: AddressRvItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(address: Address, isSelected: Boolean) {
             binding.apply {
                 buttonAddress.text = address.addressTitle
                 if (isSelected) {
-                    buttonAddress.background = ColorDrawable(itemView.context.resources.getColor(R.color.g_blue))
+                    buttonAddress.background =
+                        ColorDrawable(itemView.context.resources.getColor(R.color.g_blue))
                 } else {
-                    buttonAddress.background = ColorDrawable(itemView.context.resources.getColor(R.color.g_white))
+                    buttonAddress.background =
+                        ColorDrawable(itemView.context.resources.getColor(R.color.g_white))
                 }
             }
         }
@@ -51,6 +54,13 @@ class AddressAdapter : RecyclerView.Adapter<AddressAdapter.AddressViewHolder>() 
         )
     }
 
+
+    init {
+        differ.addListListener { _, _ ->
+            notifyItemChanged(selectedAddress)
+        }
+    }
+
     override fun getItemCount(): Int {
         return differ.currentList.size
     }
@@ -60,11 +70,16 @@ class AddressAdapter : RecyclerView.Adapter<AddressAdapter.AddressViewHolder>() 
         val address = differ.currentList[position]
         holder.bind(address, selectedAddress == position)
         holder.binding.buttonAddress.setOnClickListener {
-            if (selectedAddress <= 0)
+            if (selectedAddress <= 0) {
                 notifyItemChanged(selectedAddress)
+            }
+            if (selectedAddress>0){
+                notifyItemChanged(selectedAddress)
+            }
             selectedAddress = holder.adapterPosition
             notifyItemChanged(selectedAddress)
             onClick?.invoke(address)
+
         }
     }
 

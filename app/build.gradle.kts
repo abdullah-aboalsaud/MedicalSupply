@@ -100,8 +100,6 @@ dependencies {
     implementation("com.airbnb.android:lottie:6.1.0")
 
 
-
-
     //loading button
     implementation ("br.com.simplepass:loading-button-android:2.2.0")
 
