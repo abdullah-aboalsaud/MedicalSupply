@@ -66,7 +66,6 @@ dependencies {
     implementation("com.google.firebase:firebase-database")
     // Firebase Authentication
     implementation("com.google.firebase:firebase-auth")
-
     // navigation component
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.5")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
@@ -86,48 +85,38 @@ dependencies {
     implementation("de.hdodenhof:circleimageview:3.1.0")
 
     // Room
-
     implementation("androidx.room:room-runtime:2.6.1")
     // To use Kotlin annotation processing tool (kapt)
     kapt("androidx.room:room-compiler:2.6.1")
     // Kotlin Extensions and Coroutines support for Room
     implementation("androidx.room:room-ktx:2.6.1")
-
     // optional - RxJava2 support for Room
     implementation("androidx.room:room-rxjava2:2.6.1")
-
     // lottie
     implementation("com.airbnb.android:lottie:6.1.0")
 
 
     //loading button
-    implementation ("br.com.simplepass:loading-button-android:2.2.0")
-
+    implementation("br.com.simplepass:loading-button-android:2.2.0")
     //Glide
-    implementation ("com.github.bumptech.glide:glide:4.16.0")
-
-
+    implementation("com.github.bumptech.glide:glide:4.16.0")
     //viewpager2 indicatior
-    implementation ("io.github.vejei.viewpagerindicator:viewpagerindicator:1.0.0-alpha.1")
-
+    implementation("io.github.vejei.viewpagerindicator:viewpagerindicator:1.0.0-alpha.1")
     //stepView
-    implementation ("com.shuhart.stepview:stepview:1.5.1")
-
+    implementation("com.shuhart.stepview:stepview:1.5.1")
     //Android Ktx
-    implementation ("androidx.navigation:navigation-fragment-ktx:2.7.5")
-
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.5")
     //Dagger hilt
-    implementation ("com.google.dagger:hilt-android:2.43.2")
-    kapt ("com.google.dagger:hilt-compiler:2.43.2")
+    implementation("com.google.dagger:hilt-android:2.43.2")
+    kapt("com.google.dagger:hilt-compiler:2.43.2")
 
     // Firebase Firestore
-    implementation ("com.google.firebase:firebase-firestore:24.10.0")
-
+    implementation("com.google.firebase:firebase-firestore:24.10.0")
     // firebase storage
-    implementation ("com.google.firebase:firebase-storage:20.3.0")
-
-    //Color picker
-    implementation ("com.github.skydoves:colorpickerview:2.2.4")
-
+    implementation("com.google.firebase:firebase-storage:20.3.0")
+    // Color picker
+    implementation("com.github.skydoves:colorpickerview:2.2.4")
+    // coroutines with firebase
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.1")
 
 }

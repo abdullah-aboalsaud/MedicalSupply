@@ -128,4 +128,5 @@ class ProductDetailsFragment : Fragment() {
     private fun setUpSizesRv() {
         binding.rvSizes.adapter = sizesAdapter
     }
+
 }

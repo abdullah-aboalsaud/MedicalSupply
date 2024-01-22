@@ -146,7 +146,7 @@ class SignUpFragment : Fragment() {
     private fun sendDataToRealTime(name: String, email: String, userId: String) {
         db.collection(KeyUser)
             .document(userId)
-            .set(ModelUser(email,name,userId))
+            .set(ModelUser(email,name,"",userId))
             .addOnSuccessListener {
                 binding.progress.visibility = View.GONE
 

@@ -54,7 +54,6 @@ class AddressAdapter : RecyclerView.Adapter<AddressAdapter.AddressViewHolder>() 
         )
     }
 
-
     init {
         differ.addListListener { _, _ ->
             notifyItemChanged(selectedAddress)
