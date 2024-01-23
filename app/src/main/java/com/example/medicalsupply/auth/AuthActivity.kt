@@ -14,5 +14,4 @@ class AuthActivity : AppCompatActivity() {
         _binding = ActivityAuthBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
-
 }
