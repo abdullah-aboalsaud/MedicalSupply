@@ -12,8 +12,16 @@ import com.example.medicalsupply.databinding.ItemProductRvBinding
 import com.example.medicalsupply.models.Product
 import com.example.medicalsupply.utils.getProductPrice
 
-class BestProductAdapter : RecyclerView.Adapter<BestProductAdapter.BestProductViewHolder>() {
-    inner class BestProductViewHolder(private val binding: ItemProductRvBinding) :
+class SearchAdapter:RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
+
+    lateinit var productList :ArrayList<Product>
+
+    fun updateAdapter(newList:ArrayList<Product>){
+       this.productList =newList
+        notifyDataSetChanged()
+    }
+
+    inner class SearchViewHolder(private val binding: ItemProductRvBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(product: Product) {
             binding.apply {
@@ -35,40 +43,26 @@ class BestProductAdapter : RecyclerView.Adapter<BestProductAdapter.BestProductVi
         }
     }
 
-    private val diffCallable = object : DiffUtil.ItemCallback<Product>() {
-        override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
-            return oldItem.id == newItem.id
-        }
-
-        override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
-            return oldItem == newItem
-        }
-    }
-
-    val differ = AsyncListDiffer(this, diffCallable)
-
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BestProductViewHolder {
-        return BestProductViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
+        return SearchViewHolder(
             ItemProductRvBinding.inflate(LayoutInflater.from(parent.context))
         )
     }
 
     override fun getItemCount(): Int {
-        return differ.currentList.size
+        return productList.size
     }
 
-    override fun onBindViewHolder(holder: BestProductViewHolder, position: Int) {
-        val product = differ.currentList[position]
+    override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
+        val product = productList[position]
         holder.bind(product)
         holder.itemView.setOnClickListener {
             onClick?.invoke(product)
         }
-        
+
     }
 
     var onClick: ((Product) -> Unit)? = null
 
 
 }
-

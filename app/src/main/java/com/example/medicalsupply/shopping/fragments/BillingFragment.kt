@@ -60,6 +60,18 @@ class BillingFragment : Fragment() {
         setUpBillingProductRv()
         setUpAddressRv()
 
+        if (!args.payment) {
+            binding.apply {
+                buttonPlaceOrder.visibility = View.INVISIBLE
+                totalBoxContainer.visibility = View.INVISIBLE
+                middleLine.visibility = View.INVISIBLE
+                bottomLine.visibility = View.INVISIBLE
+            }
+        }
+
+        binding.imageCloseBilling.setOnClickListener {
+            findNavController().navigateUp()
+        }
         binding.imageAddAddress.setOnClickListener {
             findNavController().navigate(R.id.action_billingFragment_to_addressFragment)
         }
@@ -92,7 +104,7 @@ class BillingFragment : Fragment() {
             }
         }
         viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED){
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
                 orderViewmodel.orderSF.collectLatest {
                     when (it) {
                         is Resource.Loading -> {
@@ -102,7 +114,11 @@ class BillingFragment : Fragment() {
                         is Resource.Success -> {
                             binding.buttonPlaceOrder.revertAnimation()
                             findNavController().navigateUp()
-                            Snackbar.make(requireView(),"Your order was placed",Snackbar.LENGTH_LONG).show()
+                            Snackbar.make(
+                                requireView(),
+                                "Your order was placed",
+                                Snackbar.LENGTH_LONG
+                            ).show()
                         }
 
                         is Resource.Error -> {
@@ -124,13 +140,19 @@ class BillingFragment : Fragment() {
 
         binding.tvTotalPrice.text = "EGP $totalPrice"
 
-        addressAdapter.onClick={
+        addressAdapter.onClick = {
             selectedAddress = it
+            if (!args.payment) {
+                findNavController().navigate(
+                    BillingFragmentDirections.actionBillingFragmentToAddressFragment(selectedAddress)
+                )
+            }
         }
 
         binding.buttonPlaceOrder.setOnClickListener {
-            if (selectedAddress==null){
-                Toast.makeText(requireContext(), "Please select an address", Toast.LENGTH_SHORT).show()
+            if (selectedAddress == null) {
+                Toast.makeText(requireContext(), "Please select an address", Toast.LENGTH_SHORT)
+                    .show()
                 return@setOnClickListener
             }
 

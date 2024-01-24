@@ -69,6 +69,10 @@ class AllOrdersFragment : Fragment() {
             val action = AllOrdersFragmentDirections.actionAllOrdersFragmentToOrderDetailFragment(it)
             findNavController().navigate(action)
         }
+
+        binding.imageCloseOrders.setOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 
     private fun setUpOrdersRv() {

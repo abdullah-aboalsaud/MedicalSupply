@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.medicalsupply.databinding.FragmentOrderDetailBinding
 import com.example.medicalsupply.order.OrderStatus
@@ -64,6 +65,10 @@ class OrderDetailFragment : Fragment() {
         }
 
         billingProductAdapter.differ.submitList(order.products)
+
+        binding.imageCloseOrder.setOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 
     private fun setUpOrderRv() {

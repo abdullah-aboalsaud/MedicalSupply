@@ -58,6 +58,7 @@ class UserAccountFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.userSF.collectLatest {
@@ -130,6 +131,10 @@ class UserAccountFragment : Fragment() {
             val intent = Intent(Intent.ACTION_GET_CONTENT)
             intent.type="image/*"
             imageActivityResultLauncher.launch(intent)
+        }
+
+        binding.imageCloseUserAccount.setOnClickListener {
+            findNavController().navigateUp()
         }
 
     }

@@ -55,7 +55,8 @@ class ProfileFragment : Fragment() {
             findNavController().navigate(
                 ProfileFragmentDirections.actionProfileFragmentToBillingFragment(
                     0f,
-                    emptyArray()
+                    emptyArray(),
+                    false
                 )
             )
         }

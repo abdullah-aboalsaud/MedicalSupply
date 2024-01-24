@@ -9,7 +9,9 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.medicalsupply.R
 import com.example.medicalsupply.databinding.FragmentMainCategoryBinding
@@ -21,6 +23,7 @@ import com.example.medicalsupply.shopping.viewmodels.MainCategoryViewModel
 import com.example.medicalsupply.utils.Resource
 import com.example.medicalsupply.utils.showBottomNavigationView
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 private const val TAG = "MainCategoryFragment"
 
@@ -116,26 +119,29 @@ class MainCategoryFragment : Fragment(R.layout.fragment_main_category) {
             }
         }
 
-        lifecycleScope.launchWhenStarted {
-            viewModel.bestProductsSF.collectLatest {
-                when (it) {
-                    is Resource.Loading -> {
-                        showLoading()
-                    }
+        viewLifecycleOwner.lifecycleScope.launch{
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                viewModel.bestProductsSF.collectLatest {
+                    when (it) {
+                        is Resource.Loading -> {
+                            showLoading()
+                        }
 
-                    is Resource.Success -> {
-                        bestProductAdapter.differ.submitList(it.data)
-                        hideLoading()
-                    }
+                        is Resource.Success -> {
+                            bestProductAdapter.differ.submitList(it.data)
+                            hideLoading()
+                        }
 
-                    is Resource.Error -> {
-                        hideLoading()
-                        Log.e(TAG, it.message.toString())
-                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                        is Resource.Error -> {
+                            hideLoading()
+                            Log.e(TAG, it.message.toString())
+                            Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                        }
+                        else -> Unit
                     }
-                    else -> Unit
                 }
             }
+
         }
 
     }

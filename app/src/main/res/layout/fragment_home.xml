@@ -48,9 +48,11 @@
                 android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/iv_search"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
+                android:id="@+id/iv_search"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_marginEnd="20dp"
@@ -62,15 +64,14 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <View
-            android:layout_width="10dp"
-            android:layout_height="match_parent" />
+
 
         <ImageView
             android:layout_width="40dp"
             android:layout_height="match_parent"
             android:background="@drawable/icon_background"
             android:backgroundTint="@color/g_search_and_icons"
+            android:visibility="gone"
             android:padding="10dp"
             android:src="@drawable/ic_scan" />
 
@@ -83,6 +84,7 @@
             android:layout_height="match_parent"
             android:background="@drawable/icon_background"
             android:backgroundTint="@color/g_search_and_icons"
+            android:visibility="gone"
             android:padding="10dp"
             android:src="@drawable/ic_microphone" />
 
@@ -124,14 +126,6 @@
         app:spanCount="2"
         tools:layout_editor_absoluteX="26dp"
         tools:listitem="@layout/item_device" />
-
-    <ImageView
-        android:id="@+id/btn_logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/icon_logout"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -176,4 +170,4 @@
                 android:layout_height="match_parent"
                 android:textSize="@dimen/_9ssp" />
 
-        </com.google.android.material.textfield.TextInputLayout>-->
+        </com.google.android.material.textfield.TextInputLayout>  -->

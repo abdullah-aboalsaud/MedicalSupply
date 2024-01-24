@@ -50,4 +50,13 @@ class AddressViewModel : ViewModel() {
                 address.street.trim().isNotEmpty()
     }
 
+    fun deleteAddress (address: Address){
+        firestore.collection(KeyUser).document(auth.uid!!).collection("address")
+            .whereEqualTo("phone",address.phone).get().addOnSuccessListener {
+                it.documents.forEach {
+                    it.reference.delete()
+                }
+            }
+    }
+
 }

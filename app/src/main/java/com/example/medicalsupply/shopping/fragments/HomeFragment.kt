@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.medicalsupply.R
 import com.example.medicalsupply.auth.AuthActivity
 import com.example.medicalsupply.databinding.FragmentHomeBinding
@@ -63,49 +64,10 @@ class HomeFragment : Fragment() {
 
         }.attach()
 
-        /*  binding.progress.visibility = View.VISIBLE
 
-          viewModel.productLiveData.observe(viewLifecycleOwner, Observer {
-
-              productList = it
-              adapterDevices.deviceList = it
-              binding.recyclerDevices.adapter = adapterDevices
-
-              binding.progress.visibility = View.GONE
-
-              adapterDevices.setOnclick { id ->
-                  findNavController()
-                      .navigate(
-                          HomeFragmentDirections.actionProductsFragmentToDetailsProductFragment(id)
-                      )
-              }
-
-              *//*     binding.ibCart.setOnClickListener {
-                     findNavController()
-                         .navigate(HomeFragmentDirections.actionProductsFragmentToCartFragment())
-                 }*//*
-        })*/
-
-        binding.btnLogout.setOnClickListener {
-            if (auth.uid != null) {
-                auth.signOut()
-                startActivity(Intent(requireContext(), AuthActivity::class.java))
-                requireActivity().finish()
-            }
+        binding.searchBar.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToSearchFragment())
         }
-
-
-        /*    binding.search.doAfterTextChanged {
-                var query = it.toString()
-                val newList = productList?.filter {
-                    it.name.toLowerCase().contains(query.toLowerCase())
-                }
-
-                if (!newList.isNullOrEmpty())
-                    adapterDevices.updateData(newList as ArrayList<ModelProduct>)
-
-            }*/
-
     }
 
 

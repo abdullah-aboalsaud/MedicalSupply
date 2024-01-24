@@ -9,7 +9,9 @@ import android.widget.Toast
 import androidx.annotation.ColorInt
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.medicalsupply.R
@@ -72,24 +74,26 @@ class ProductDetailsFragment : Fragment() {
         }
 
 
-        lifecycleScope.launchWhenStarted {
-            viewModel.addToCartSF.collectLatest {
-                when (it) {
-                    is Resource.Loading -> {
-                        binding.buttonAddToCart.startAnimation()
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                viewModel.addToCartSF.collectLatest {
+                    when (it) {
+                        is Resource.Loading -> {
+                            binding.buttonAddToCart.startAnimation()
+                        }
+                        is Resource.Success -> {
+                            binding.buttonAddToCart.revertAnimation()
+                            Toast.makeText(requireContext(), "Added Successfully", Toast.LENGTH_SHORT).show()
+                        }
+                        is Resource.Error -> {
+                            binding.buttonAddToCart.revertAnimation()
+                            Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                        }
+                        else -> Unit
                     }
-                    is Resource.Success -> {
-                        binding.buttonAddToCart.revertAnimation()
-                        binding.buttonAddToCart.setTextColor(resources.getColor(R.color.black))
-                        Toast.makeText(requireContext(), "Added Successfully", Toast.LENGTH_SHORT).show()
-                    }
-                    is Resource.Error -> {
-                        binding.buttonAddToCart.revertAnimation()
-                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
-                    }
-                    else -> Unit
                 }
             }
+
         }
 
 

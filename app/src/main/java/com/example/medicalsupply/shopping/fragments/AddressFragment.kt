@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.medicalsupply.databinding.FragmentAddressBinding
 import com.example.medicalsupply.models.Address
 import com.example.medicalsupply.shopping.viewmodels.AddressViewModel
@@ -18,6 +19,7 @@ import kotlinx.coroutines.flow.collectLatest
 class AddressFragment : Fragment() {
     private lateinit var binding: FragmentAddressBinding
     val viewModel by viewModels<AddressViewModel>()
+    val args by navArgs<AddressFragmentArgs>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         lifecycleScope.launchWhenStarted {
@@ -62,6 +64,21 @@ class AddressFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val address = args.address
+        if (address==null){
+            binding.buttonDelelte.visibility = View.GONE
+        }else{
+            binding.apply {
+                edAddressTitle.setText(address.addressTitle)
+                edFullName.setText(address.fullName)
+                edStreet.setText(address.street)
+                edPhone.setText(address.phone)
+                edCity.setText(address.city)
+                edState.setText(address.state)
+            }
+        }
+
+
         binding.apply {
             buttonSave.setOnClickListener {
                 val addressTitle = edAddressTitle.text.toString().trim()
@@ -75,6 +92,28 @@ class AddressFragment : Fragment() {
                 viewModel.addAddress(address)
             }
         }
+
+        binding.buttonDelelte.setOnClickListener {
+            address.let {
+              viewModel.deleteAddress(address!!)
+                Toast.makeText(requireContext(), "The address was deleted", Toast.LENGTH_SHORT).show()
+
+                binding.apply {
+                    edAddressTitle.setText("")
+                    edFullName.setText("")
+                    edStreet.setText("")
+                    edPhone.setText("")
+                    edCity.setText("")
+                    edState.setText("")
+                }
+            }
+
+        }
+
+        binding.imageAddressClose.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
 
     }
 
