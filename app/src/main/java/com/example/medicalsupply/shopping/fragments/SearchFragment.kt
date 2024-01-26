@@ -12,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import com.example.medicalsupply.databinding.FragmentSearchBinding
 import com.example.medicalsupply.models.Product
 import com.example.medicalsupply.shopping.adapters.BestProductAdapter
@@ -44,6 +45,12 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        searchAdapter.onClick = {
+            findNavController().navigate(
+                SearchFragmentDirections.actionSearchFragmentToProductDetailsFragment(it)
+            )
+        }
+
 
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -71,6 +78,7 @@ class SearchFragment : Fragment() {
                 }
             }
         }
+
 
 
         binding.search.doAfterTextChanged {

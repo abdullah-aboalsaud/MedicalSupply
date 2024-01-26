@@ -65,9 +65,9 @@ class HomeFragment : Fragment() {
         }.attach()
 
 
-        binding.searchBar.setOnClickListener {
+      /*  binding.searchBar.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToSearchFragment())
-        }
+        }*/
     }
 
 
